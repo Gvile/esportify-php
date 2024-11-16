@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Inscription
+{% endblock %}
+
+{% block body %}
+	<div>
+		<div>
+			<div>
+				{{ form_start(user_form) }}
+				<div>
+					{{ form_label(user_form.email, null) }}
+					{{ form_widget(user_form.email) }}
+					{{ form_errors(user_form.email)}}
+				</div>
+				<div>
+					{{ form_label(user_form.password, null) }}
+					{{ form_widget(user_form.password) }}
+					{{ form_errors(user_form.password})}}
+				</div>
+				<div>
+					{{ form_label(user_form.pseudo, null) }}
+					{{ form_widget(user_form.pseudo) }}
+					{{ form_errors(user_form.pseudo)}}
+				</div>
+				<div>
+					{{ form_widget(user_form.submit) }}
+				</div>
+				{{ form_end(user_form) }}
+			</div>
+		</div>
+	</div>
+{% endblock %}

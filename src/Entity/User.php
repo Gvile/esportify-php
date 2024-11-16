@@ -8,6 +8,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\Table(name: '`user`')]
@@ -32,6 +33,22 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @var string The hashed password
      */
     #[ORM\Column]
+    #[Assert\Length(
+        min: 8,
+        minMessage: "Votre mot de passe doit contenir au minimum {{ limit }} caractères"
+    )]
+    #[Assert\Regex(
+        pattern: "/[a-z]/",
+        message: "Le mot de passe doit contenir au moins une lettre minuscule"
+    )]
+    #[Assert\Regex(
+        pattern: "/[A-Z]/",
+        message: "Le mot de passe doit contenir au moins une lettre majuscule"
+    )]
+    #[Assert\Regex(
+        pattern: "/[0-9]/",
+        message: "Le mot de passe doit contenir au moins un chiffre"
+    )]
     private ?string $password = null;
 
     #[ORM\Column(length: 50)]
@@ -154,7 +171,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         if (!$this->events->contains($event)) {
             $this->events->add($event);
-            $event->setOwnerUserId($this);
+            $event->setOwnerUser($this);
         }
 
         return $this;
@@ -164,8 +181,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         if ($this->events->removeElement($event)) {
             // set the owning side to null (unless already changed)
-            if ($event->getOwnerUserId() === $this) {
-                $event->setOwnerUserId(null);
+            if ($event->getOwnerUser() === $this) {
+                $event->setOwnerUser(null);
             }
         }
 
