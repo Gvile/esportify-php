@@ -33,7 +33,7 @@ class UserController extends AbstractController
                 $user->getPassword()
             );
             $user->setPassword($hashedPassword);
-            $user->setRoles(['ROLE_ADMIN']);
+            $user->setRoles(['ROLE_USER']);
 
             $em = $doctrine->getManager();
             $em->persist($user);

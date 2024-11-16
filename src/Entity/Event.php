@@ -25,10 +25,10 @@ class Event
     #[ORM\Column]
     private ?int $maxUser = null;
 
-    #[ORM\Column(type: Types::TIME_MUTABLE)]
+    #[ORM\Column(type: Types::DATETIME_IMMUTABLE)]
     private ?\DateTimeInterface $startDate = null;
 
-    #[ORM\Column(type: Types::TIME_MUTABLE)]
+    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $endDate = null;
 
     #[ORM\ManyToOne(inversedBy: 'events')]
@@ -71,6 +71,12 @@ class Event
 
         return $this;
     }
+
+    public function __toString(): string
+    {
+        return $this->title;
+    }
+
 
     public function getDescription(): ?string
     {
@@ -156,7 +162,7 @@ class Event
     {
         if (!$this->eventImages->contains($eventImage)) {
             $this->eventImages->add($eventImage);
-            $eventImage->setEventId($this);
+            $eventImage->setEvent($this);
         }
 
         return $this;
@@ -166,8 +172,8 @@ class Event
     {
         if ($this->eventImages->removeElement($eventImage)) {
             // set the owning side to null (unless already changed)
-            if ($eventImage->getEventId() === $this) {
-                $eventImage->setEventId(null);
+            if ($eventImage->getEvent() === $this) {
+                $eventImage->setEvent(null);
             }
         }
 

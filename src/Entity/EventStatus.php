@@ -58,7 +58,7 @@ class EventStatus
     {
         if (!$this->events->contains($event)) {
             $this->events->add($event);
-            $event->setEventStatusId($this);
+            $event->setEventStatus($this);
         }
 
         return $this;
@@ -68,8 +68,8 @@ class EventStatus
     {
         if ($this->events->removeElement($event)) {
             // set the owning side to null (unless already changed)
-            if ($event->getEventStatusId() === $this) {
-                $event->setEventStatusId(null);
+            if ($event->getEventStatus() === $this) {
+                $event->setEventStatus(null);
             }
         }
 

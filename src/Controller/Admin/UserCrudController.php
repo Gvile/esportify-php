@@ -11,7 +11,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\EmailField;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use EasyCorp\Bundle\EasyAdminBundle\Event\BeforeEntityPersistedEvent;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
-use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class UserCrudController extends AbstractCrudController implements EventSubscriberInterface
@@ -33,6 +33,14 @@ class UserCrudController extends AbstractCrudController implements EventSubscrib
         yield EmailField::new('email')->setLabel('Adresse E-Mail');
         yield TextField::new('pseudo')->setLabel('Pseudo');
         yield TextField::new('password')->setLabel('Mot de passe')->hideOnIndex();
+        yield ChoiceField::new('roles')->setChoices([
+            'ROLE_USER' => 'ROLE_USER',
+            'ROLE_ORGANIZER' => 'ROLE_ORGANIZER',
+            'ROLE_ADMIN' => 'ROLE_ADMIN',
+        ])
+            ->renderExpanded(false)
+            ->setFormTypeOption('multiple', true)
+            ->setLabel('Rôle');
     }
 
     public static function getSubscribedEvents(): array
