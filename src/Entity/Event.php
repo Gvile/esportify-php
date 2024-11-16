@@ -32,10 +32,10 @@ class Event
     private ?\DateTimeInterface $endDate = null;
 
     #[ORM\ManyToOne(inversedBy: 'events')]
-    private ?User $ownerUserId = null;
+    private ?User $ownerUser = null;
 
     #[ORM\ManyToOne(inversedBy: 'events')]
-    private ?EventStatus $eventStatusId = null;
+    private ?EventStatus $eventStatus = null;
 
     /**
      * @var Collection<int, EventImage>
@@ -120,26 +120,26 @@ class Event
         return $this;
     }
 
-    public function getOwnerUserId(): ?User
+    public function getOwnerUser(): ?User
     {
-        return $this->ownerUserId;
+        return $this->ownerUser;
     }
 
-    public function setOwnerUserId(?User $ownerUserId): static
+    public function setOwnerUser(?User $ownerUserId): static
     {
-        $this->ownerUserId = $ownerUserId;
+        $this->ownerUser = $ownerUserId;
 
         return $this;
     }
 
-    public function getEventStatusId(): ?EventStatus
+    public function getEventStatus(): ?EventStatus
     {
-        return $this->eventStatusId;
+        return $this->eventStatus;
     }
 
-    public function setEventStatusId(?EventStatus $eventStatusId): static
+    public function setEventStatus(?EventStatus $eventStatusId): static
     {
-        $this->eventStatusId = $eventStatusId;
+        $this->eventStatus = $eventStatusId;
 
         return $this;
     }

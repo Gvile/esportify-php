@@ -17,7 +17,7 @@ class EventImage
     private ?string $image = null;
 
     #[ORM\ManyToOne(inversedBy: 'eventImages')]
-    private ?Event $eventId = null;
+    private ?Event $event = null;
 
     public function getId(): ?int
     {
@@ -36,14 +36,14 @@ class EventImage
         return $this;
     }
 
-    public function getEventId(): ?Event
+    public function getEvent(): ?Event
     {
-        return $this->eventId;
+        return $this->event;
     }
 
-    public function setEventId(?Event $eventId): static
+    public function setEvent(?Event $eventId): static
     {
-        $this->eventId = $eventId;
+        $this->event = $eventId;
 
         return $this;
     }
