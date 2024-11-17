@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Event;
 use App\Entity\EventImage;
 use App\Form\AddEventType;
+use App\Repository\EventRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -48,6 +49,24 @@ class EventController extends AbstractController
 
         return $this->render('event/add-event.html.twig', [
             "form" => $form->createView(),
+        ]);
+    }
+
+    #[Route('/events', name: 'app_event_list')]
+    public function getAll(EventRepository $eventRepository): Response
+    {
+        $currentDate = new \DateTime();
+        $events = $eventRepository->findBy(
+            ['isValidated' => true],
+            ['endDate' => 'ASC']
+        );
+
+        $filteredEvents = array_filter($events, function ($event) use ($currentDate) {
+            return $event->getEndDate() > $currentDate;
+        });
+
+        return $this->render('event/list.html.twig', [
+            "events" => $filteredEvents,
         ]);
     }
 }

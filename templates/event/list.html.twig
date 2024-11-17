@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Tous les événements
+{% endblock %}
+
+{% block body %}
+	<h1>Tous les événements</h1>
+
+	<ul>
+		{% for event in events %}
+			<li>
+				{{ event.title }}
+				-
+				{{ event.startDate|date('Y-m-d H:i') }}
+				{# <a href="{{ path('event_detail', {'id': event.id}) }}" class="btn btn-primary">Voir Détails</a> #}
+			</li>
+		{% else %}
+			<p>Aucun événement trouvé.</p>
+		{% endfor %}
+	</ul>
+{% endblock %}
