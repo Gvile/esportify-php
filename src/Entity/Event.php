@@ -25,17 +25,17 @@ class Event
     #[ORM\Column]
     private ?int $maxUser = null;
 
-    #[ORM\Column(type: Types::TIME_MUTABLE)]
+    #[ORM\Column(type: Types::DATETIME_IMMUTABLE)]
     private ?\DateTimeInterface $startDate = null;
 
-    #[ORM\Column(type: Types::TIME_MUTABLE)]
+    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $endDate = null;
 
     #[ORM\ManyToOne(inversedBy: 'events')]
     private ?User $ownerUser = null;
 
-    #[ORM\ManyToOne(inversedBy: 'events')]
-    private ?EventStatus $eventStatus = null;
+    #[ORM\Column]
+    private bool $isValidated;
 
     /**
      * @var Collection<int, EventImage>
@@ -71,6 +71,12 @@ class Event
 
         return $this;
     }
+
+    public function __toString(): string
+    {
+        return $this->title;
+    }
+
 
     public function getDescription(): ?string
     {
@@ -132,18 +138,6 @@ class Event
         return $this;
     }
 
-    public function getEventStatus(): ?EventStatus
-    {
-        return $this->eventStatus;
-    }
-
-    public function setEventStatus(?EventStatus $eventStatusId): static
-    {
-        $this->eventStatus = $eventStatusId;
-
-        return $this;
-    }
-
     /**
      * @return Collection<int, EventImage>
      */
@@ -156,7 +150,7 @@ class Event
     {
         if (!$this->eventImages->contains($eventImage)) {
             $this->eventImages->add($eventImage);
-            $eventImage->setEventId($this);
+            $eventImage->setEvent($this);
         }
 
         return $this;
@@ -166,8 +160,8 @@ class Event
     {
         if ($this->eventImages->removeElement($eventImage)) {
             // set the owning side to null (unless already changed)
-            if ($eventImage->getEventId() === $this) {
-                $eventImage->setEventId(null);
+            if ($eventImage->getEvent() === $this) {
+                $eventImage->setEvent(null);
             }
         }
 
@@ -200,6 +194,29 @@ class Event
                 $eventUser->setEvent(null);
             }
         }
+
+        return $this;
+    }
+
+    /**
+     * Get the value of isValidated
+     *
+     * @return bool
+     */
+    public function getIsValidated(): bool
+    {
+        return $this->isValidated;
+    }
+
+    /**
+     * Set the value of isValidated
+     *
+     * @param bool $isValidated
+     * @return self
+     */
+    public function setIsValidated(bool $isValidated): self
+    {
+        $this->isValidated = $isValidated;
 
         return $this;
     }
