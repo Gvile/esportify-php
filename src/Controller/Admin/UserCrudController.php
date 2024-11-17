@@ -32,7 +32,6 @@ class UserCrudController extends AbstractCrudController implements EventSubscrib
     {
         yield EmailField::new('email')->setLabel('Adresse E-Mail');
         yield TextField::new('pseudo')->setLabel('Pseudo');
-        yield TextField::new('password')->setLabel('Mot de passe')->hideOnIndex();
         yield ChoiceField::new('roles')->setChoices([
             'ROLE_USER' => 'ROLE_USER',
             'ROLE_ORGANIZER' => 'ROLE_ORGANIZER',
