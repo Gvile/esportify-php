@@ -58,7 +58,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @var Collection<int, Event>
      */
-    #[ORM\OneToMany(targetEntity: Event::class, mappedBy: 'ownerUserId')]
+    #[ORM\OneToMany(targetEntity: Event::class, mappedBy: 'ownerUser')]
     private Collection $events;
 
     /**
