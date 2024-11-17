@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	{{ event.title }}
+{% endblock %}
+
+{% block body %}
+	<h1>Bonjour
+		{{ user.pseudo }}, vous avez bien rejoint l'événement :
+		{{ event.title }}</h1>
+{% endblock %}
