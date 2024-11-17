@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello HomeController!
+{% endblock %}
+
+{% block body %}
+	<h2>Événements à venir</h2>
+	<ul>
+		{% for event in upcomingEvents %}
+			<li>{{ event.title }}
+				-
+				{{ event.startDate|date('Y-m-d H:i') }}</li>
+		{% endfor %}
+	</ul>
+
+	<h2>Événements en cours</h2>
+	<ul>
+		{% for event in ongoingEvents %}
+			<li>{{ event.title }}
+				-
+				{{ event.startDate|date('Y-m-d H:i') }}
+				à
+				{{ event.endDate|date('Y-m-d H:i') }}</li>
+		{% endfor %}
+	</ul>
+
+{% endblock %}
