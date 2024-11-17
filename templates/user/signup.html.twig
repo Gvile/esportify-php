@@ -15,8 +15,8 @@
 				</div>
 				<div>
 					{{ form_label(user_form.password, null) }}
-					{{ form_widget(user_form.password) }}
-					{{ form_errors(user_form.password})}}
+					{{ form_widget(user_form.password, {'attr': { 'class': 'form-label' }}) }}
+					{{ form_errors(user_form.password)}}
 				</div>
 				<div>
 					{{ form_label(user_form.pseudo, null) }}
