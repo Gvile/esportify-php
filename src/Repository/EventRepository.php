@@ -40,4 +40,36 @@ class EventRepository extends ServiceEntityRepository
     //            ->getOneOrNullResult()
     //        ;
     //    }
+
+    public function findUpcomingAndOngoingEvents(\DateTimeInterface $currentDate): array
+    {
+        $qb = $this->createQueryBuilder('e');
+
+        // Query for upcoming events with 'is_validated' = true
+        $upcomingEvents = $qb
+            ->andWhere('e.startDate > :currentDate')
+            ->andWhere('e.isValidated = :isValidated') // Condition pour 'is_validated' = true
+            ->setParameter('currentDate', $currentDate)
+            ->setParameter('isValidated', true) // Définir la valeur à true
+            ->orderBy('e.startDate', 'ASC')
+            ->setMaxResults(4)
+            ->getQuery()
+            ->getResult();
+
+        // Query for ongoing events with 'is_validated' = true
+        $ongoingEvents = $this->createQueryBuilder('e2')
+            ->andWhere(':currentDate BETWEEN e2.startDate AND e2.endDate')
+            ->andWhere('e2.isValidated = :isValidated') // Condition pour 'is_validated' = true
+            ->setParameter('currentDate', $currentDate)
+            ->setParameter('isValidated', true) // Définir la valeur à true
+            ->orderBy('e2.startDate', 'ASC')
+            ->setMaxResults(2)
+            ->getQuery()
+            ->getResult();
+
+        return [
+            'upcoming' => $upcomingEvents,
+            'ongoing' => $ongoingEvents,
+        ];
+    }
 }
