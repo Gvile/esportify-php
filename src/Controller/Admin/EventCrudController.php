@@ -10,6 +10,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
+use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 
 class EventCrudController extends AbstractCrudController
 {
@@ -25,6 +26,8 @@ class EventCrudController extends AbstractCrudController
         yield NumberField::new('maxUser')->setLabel('Utilisateurs max');
         yield DateTimeField::new('startDate')->setLabel('Date de début');
         yield DateTimeField::new('endDate')->setLabel('Date de fin');
+        yield BooleanField::new('isValidated')->setLabel('Validation');
+        //TODO: Add event images crud
     }
 
     public function configureActions(Actions $actions): Actions

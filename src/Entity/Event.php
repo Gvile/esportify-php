@@ -34,8 +34,8 @@ class Event
     #[ORM\ManyToOne(inversedBy: 'events')]
     private ?User $ownerUser = null;
 
-    #[ORM\ManyToOne(inversedBy: 'events')]
-    private ?EventStatus $eventStatus = null;
+    #[ORM\Column]
+    private bool $isValidated;
 
     /**
      * @var Collection<int, EventImage>
@@ -138,18 +138,6 @@ class Event
         return $this;
     }
 
-    public function getEventStatus(): ?EventStatus
-    {
-        return $this->eventStatus;
-    }
-
-    public function setEventStatus(?EventStatus $eventStatusId): static
-    {
-        $this->eventStatus = $eventStatusId;
-
-        return $this;
-    }
-
     /**
      * @return Collection<int, EventImage>
      */
@@ -206,6 +194,29 @@ class Event
                 $eventUser->setEvent(null);
             }
         }
+
+        return $this;
+    }
+
+    /**
+     * Get the value of isValidated
+     *
+     * @return bool
+     */
+    public function getIsValidated(): bool
+    {
+        return $this->isValidated;
+    }
+
+    /**
+     * Set the value of isValidated
+     *
+     * @param bool $isValidated
+     * @return self
+     */
+    public function setIsValidated(bool $isValidated): self
+    {
+        $this->isValidated = $isValidated;
 
         return $this;
     }
