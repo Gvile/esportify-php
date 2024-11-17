@@ -18,40 +18,33 @@ class EventController extends AbstractController
     {
         $event = new Event();
         $event->setIsValidated(false);
+        $event->setOwnerUser($this->getUser());
 
         $form = $this->createForm(AddEventType::class, $event);
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
 
-            $files = $form->get('eventImages')->getData();
-            $data = [];
+            // Récupérer les images encodées en base64 envoyées depuis JS
+            $base64Images = $request->get('base64Images'); // Vous allez passer cela depuis JS
 
-            if (count($files) > 3) {
-                $this->addFlash('error', 'Vous ne pouvez pas ajouter plus de 3 images.');
-                return $this->redirectToRoute('app_event_create');
-            }
+            if ($base64Images) {
+                $em = $doctrine->getManager();
 
-            foreach ($files as $file) {
-                if ($file) {
-                    $imageBase64 = base64_encode(file_get_contents($file));
-
+                // Enregistrer les images en base64 dans la base de données
+                foreach ($base64Images as $base64Image) {
                     $eventImage = new EventImage();
-                    $eventImage->setImage($imageBase64);
-                    $eventImage->setEvent($event);
-
-                    $em = $doctrine->getManager();
+                    $eventImage->setImage($base64Image); // Sauvegarder l'image en base64
+                    $eventImage->setEvent($event); // Associer l'image à l'événement
                     $em->persist($eventImage);
                 }
+
+                $em->persist($event);
+                $em->flush();
+
+                return $this->redirectToRoute("app_home");
             }
-
-            $em = $doctrine->getManager();
-            $em->persist($event);
-            $em->flush();
-
-            return $this->redirectToRoute("app_home");
         }
-
 
         return $this->render('event/add-event.html.twig', [
             "form" => $form->createView(),

@@ -1,0 +1,69 @@
+{% extends 'base.html.twig' %}
+
+{% block javascripts %}
+	{{ parent() }}
+	<!-- Si vous avez déjà un bloc javascripts dans votre template de base -->
+
+	<script src="{{ asset('js/imageUpload.js') }}" defer></script>
+{% endblock %}
+
+
+{% block title %}Créer un nouvel événement
+{% endblock %}
+
+{% block body %}
+	<h1>Créer un événement</h1>
+
+	{{ form_start(form) }}
+
+	<div class="form-group">
+		{{ form_label(form.title, 'Titre') }}
+		{{ form_widget(form.title, {'attr': {'class': 'form-control'}}) }}
+		{{ form_errors(form.title) }}
+	</div>
+
+	<div class="form-group">
+		{{ form_label(form.description, 'Description') }}
+		{{ form_widget(form.description, {'attr': {'class': 'form-control'}}) }}
+		{{ form_errors(form.description) }}
+	</div>
+
+	<div class="form-group">
+		{{ form_label(form.maxUser, 'Participants max') }}
+		{{ form_widget(form.maxUser, {'attr': {'class': 'form-control'}}) }}
+		{{ form_errors(form.maxUser) }}
+	</div>
+
+	<div class="form-group">
+		{{ form_label(form.startDate, 'Date de début') }}
+		{{ form_widget(form.startDate, {'attr': {'class': 'form-control'}}) }}
+		{{ form_errors(form.startDate) }}
+	</div>
+
+	<div class="form-group">
+		{{ form_label(form.endDate, 'Date de fin') }}
+		{{ form_widget(form.endDate, {'attr': {'class': 'form-control'}}) }}
+		{{ form_errors(form.endDate) }}
+	</div>
+
+	<div class="form-group">
+		{{ form_label(form.eventImages, 'Images') }}
+		{{ form_widget(form.eventImages, {
+            'attr': {
+                'class': 'form-control',
+                'multiple': 'multiple',
+                'accept': 'image/*'
+            }
+        }) }}
+		{{ form_errors(form.eventImages) }}
+		<small class="form-text text-muted">Vous pouvez uploader plusieurs images.</small>
+
+		<div id="image-preview-container"></div>
+		<!-- Conteneur pour les prévisualisations -->
+	</div>
+
+</div>
+
+<button type="submit" class="btn btn-primary">Créer</button>
+
+{{ form_end(form) }}{% endblock %}
