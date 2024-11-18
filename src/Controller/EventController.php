@@ -7,7 +7,6 @@ use App\Entity\EventUser;
 use App\Entity\EventImage;
 use App\Form\AddEventType;
 use App\Repository\EventRepository;
-use App\Repository\UserRepository;
 use App\Repository\EventUserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -136,6 +135,13 @@ class EventController extends AbstractController
 
         if ($existingEventUser) {
             $this->addFlash('notice', 'Vous êtes déjà inscrit à cet événement.');
+            return $this->redirectToRoute('app_event_detail', ['id' => $id]);
+        }
+
+        $currentUserCount = $eventUserRepository->count(['event' => $event]);
+
+        if ($currentUserCount >= $event->getMaxUser()) {
+            $this->addFlash('notice', 'Le nombre maximal d\'utilisateurs pour cet événement a été atteint.');
             return $this->redirectToRoute('app_event_detail', ['id' => $id]);
         }
 
