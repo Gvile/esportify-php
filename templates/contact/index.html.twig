@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Contactez-nous{% endblock %}
+
+{% block body %}
+<div class="container mt-5">
+    <h1 class="text-center mb-4 text-primary">Formulaire de Contact</h1>
+
+    {# Affichage des messages flash (comme le message de confirmation) #}
+    {% for message in app.flashes('notice') %}
+    <div class="alert alert-success">{{ message }}</div>
+    {% endfor %}
+
+    {# Formulaire de contact #}
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <form method="post" novalidate>
+                {{ form_start(contact_form) }}
+
+                <div class="mb-3">
+                    {{ form_label(contact_form.title) }}
+                    {{ form_widget(contact_form.title, { 'attr': { 'class': 'form-control' } }) }}
+                </div>
+
+                <div class="mb-3">
+                    {{ form_label(contact_form.message) }}
+                    {{ form_widget(contact_form.message, { 'attr': { 'class': 'form-control', 'rows': 5 } }) }}
+                </div>
+
+                <div>
+                    {{ form_widget(contact_form.submit) }}
+                </div>
+
+                {{ form_end(contact_form) }}
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

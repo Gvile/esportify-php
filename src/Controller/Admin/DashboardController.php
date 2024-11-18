@@ -2,6 +2,7 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\Contact;
 use App\Entity\Event;
 use App\Entity\EventUser;
 use App\Entity\User;
@@ -47,6 +48,6 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Utilisateurs', 'fa fa-list', User::class);
         yield MenuItem::linkToCrud('Événements', 'fa fa-list', Event::class);
         yield MenuItem::linkToCrud('Participants', 'fa fa-list', EventUser::class);
-        // yield MenuItem::linkToCrud('The Label', 'fas fa-list', EntityClass::class);
+        yield MenuItem::linkToCrud('Contacts', 'fa fa-list', Contact::class);
     }
 }
