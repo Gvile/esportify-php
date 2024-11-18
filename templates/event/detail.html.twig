@@ -1,51 +1,53 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Détail de l'événement -
-	{{ event.title }}
+{{ event.title }}
 {% endblock %}
 
 {% block body %}
-	<h1>{{ event.title }}</h1>
-	<p>
-		<strong>Date de début :</strong>
-		{{ event.startDate|date('Y-m-d H:i') }}
-	</p>
-	<p>
-		<strong>Date de fin :</strong>
-		{{ event.endDate|date('Y-m-d H:i') }}
-	</p>
-	<p>
-		<strong>Description :</strong>
-		{{ event.description }}
-	</p>
+<h1>{{ event.title }}</h1>
+<p>
+	<strong>Date de début :</strong>
+	{{ event.startDate|date('Y-m-d H:i') }}
+</p>
+<p>
+	<strong>Date de fin :</strong>
+	{{ event.endDate|date('Y-m-d H:i') }}
+</p>
+<p>
+	<strong>Description :</strong>
+	{{ event.description }}
+</p>
 
-	{% for image in images %}
-		<img src="data:image/jpeg;base64,{{ image }}" alt="Event Image"/>
-	{% endfor %}
+{% for image in event.eventImages %}
+{% if image.name %}
+<img src="{{ asset('images/events/' ~ image.name) }}" alt="{{ image.name }}">
+{% endif %}
+{% endfor %}
 
-	{% if app.user %}
-		{% if not isEventStarted %}
-			{% if isUserRegistered %}
-				<form action="{{ path('app_event_leave', {'id': event.id}) }}" method="post">
-					<button type="submit" class="btn btn-danger">Se désinscrire</button>
-				</form>
-			{% else %}
-				<form action="{{ path('app_event_join', {'id': event.id}) }}" method="post">
-					<button type="submit" class="btn btn-primary">S'inscrire</button>
-				</form>
-			{% endif %}
-		{% else %}
-			<p>Les inscriptions ou désinscriptions ne sont pas possibles car l'événement a déjà commencé.</p>
-		{% endif %}
-	{% else %}
-		<p>Veuillez vous connecter pour rejoindre ou vous désinscrire de cet événement.</p>
-	{% endif %}
+{% if app.user %}
+{% if not isEventStarted %}
+{% if isUserRegistered %}
+<form action="{{ path('app_event_leave', {'id': event.id}) }}" method="post">
+	<button type="submit" class="btn btn-danger">Se désinscrire</button>
+</form>
+{% else %}
+<form action="{{ path('app_event_join', {'id': event.id}) }}" method="post">
+	<button type="submit" class="btn btn-primary">S'inscrire</button>
+</form>
+{% endif %}
+{% else %}
+<p>Les inscriptions ou désinscriptions ne sont pas possibles car l'événement a déjà commencé.</p>
+{% endif %}
+{% else %}
+<p>Veuillez vous connecter pour rejoindre ou vous désinscrire de cet événement.</p>
+{% endif %}
 
-	{% if app.user %}
-		{% if isEventStarted %}
-			{% if isUserRegistered %}
-				<a href="{{ path('app_event_joining', {'id': event.id}) }}" class="btn btn-primary">Rejoindre</a>
-			{% endif %}
-		{% endif %}
-	{% endif %}
+{% if app.user %}
+{% if isEventStarted %}
+{% if isUserRegistered %}
+<a href="{{ path('app_event_joining', {'id': event.id}) }}" class="btn btn-primary">Rejoindre</a>
+{% endif %}
+{% endif %}
+{% endif %}
 {% endblock %}

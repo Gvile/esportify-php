@@ -86,14 +86,8 @@ class EventController extends AbstractController
         $interval = $currentDateTime->diff($eventStartDate);
         $isEventStarted = $interval->invert === 0 && $interval->h === 0 && $interval->i <= 30;
 
-        $imageData = [];
-        foreach ($event->getEventImages() as $image) {
-            $imageData[] = $image->getImage();
-        }
-
         return $this->render('event/detail.html.twig', [
             'event' => $event,
-            'images' => $imageData,
             'isUserRegistered' => $isUserRegistered,
             'isEventStarted' => $isEventStarted
         ]);
