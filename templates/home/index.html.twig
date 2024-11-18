@@ -1,27 +1,82 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello HomeController!
+{% block stylesheets %}
+<link rel="stylesheet" href="{{ asset('css/home.css') }}">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 {% endblock %}
 
-{% block body %}
-	<h2>Événements à venir</h2>
-	<ul>
-		{% for event in upcomingEvents %}
-			<li>{{ event.title }}
-				-
-				{{ event.startDate|date('Y-m-d H:i') }}</li>
-		{% endfor %}
-	</ul>
+{% block title %}Esportify{% endblock %}
 
-	<h2>Événements en cours</h2>
-	<ul>
-		{% for event in ongoingEvents %}
-			<li>{{ event.title }}
-				-
-				{{ event.startDate|date('Y-m-d H:i') }}
-				à
-				{{ event.endDate|date('Y-m-d H:i') }}</li>
-		{% endfor %}
-	</ul>
+{% block body %}
+<main>
+
+	<div class="page-title"> Esportify</div>
+
+	<p class="description">Esportify est une entreprise spécialisée dans l'organisation de tournois eSport en ligne.
+		Elle propose des
+		compétitions excitantes, des expériences immersives et une plateforme pour les joueurs passionnés de tous
+		niveaux.</p>
+
+
+
+	<!-- Carrousel -->
+	<div class="d-flex justify-content-center">
+		<div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
+			<div class="carousel-inner">
+				<div class="carousel-item active">
+					<img class="d-block w-100" src="/images/Esport.jpg" alt="Logo Esport">
+				</div>
+				<div class="carousel-item">
+					<img class="d-block w-100" src="/images/joueurDeDos.jpg" alt="Image de joueur">
+				</div>
+				<div class="carousel-item">
+					<img class="d-block w-100" src="/images/JoueurDeFace.jpg" alt="Image de joueur">
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="event-section">
+		<div class="Event-title">Événements à venir</div>
+		<div class="event-list">
+			<ul>
+				{% for event in upcomingEvents %}
+				<li class="event-item">
+					<div class="event-content">
+						<span>{{ event.title }} - {{ event.startDate|date('Y-m-d H:i') }} - {{ event.endDate|date('Y-m-d
+							H:i') }}</span>
+						<button class="btn btn-primary btn-sm">Voir plus</button>
+					</div>
+				</li>
+				{% endfor %}
+			</ul>
+		</div>
+	</div>
+
+	<div class="event-section">
+		<div class="Event-title">Événements en cours</div>
+		<div class="event-list">
+			<ul>
+				{% for event in ongoingEvents %}
+				<li class="event-item">
+					<div class="event-content">
+						<span>{{ event.title }} - {{ event.startDate|date('Y-m-d H:i') }} à {{ event.endDate|date('Y-m-d
+							H:i') }}</span>
+						<button class="btn btn-primary btn-sm">Voir plus</button>
+					</div>
+				</li>
+				{% endfor %}
+			</ul>
+		</div>
+	</div>
+
+
+
+
+</main>
+
+{% block javascripts %}
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+{% endblock %}
 
 {% endblock %}

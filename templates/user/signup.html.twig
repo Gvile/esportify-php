@@ -2,32 +2,42 @@
 
 {% block title %}Inscription
 {% endblock %}
+{% block stylesheets %}
 
+<link rel="stylesheet" href="{{ asset('css/signup.css') }}">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+{% endblock %}
 {% block body %}
-	<div>
-		<div>
-			<div>
-				{{ form_start(user_form) }}
-				<div>
-					{{ form_label(user_form.email, null) }}
-					{{ form_widget(user_form.email) }}
-					{{ form_errors(user_form.email)}}
+
+
+<main>
+	<div class="container-fluid d-flex justify-content-center align-items-center min-vh-100 bg-light">
+		<div class="bg-white rounded shadow p-4" style="max-width: 500px; width: 100%;">
+			<h2 class="text-center mb-4 text-primary">Créer un compte</h2>
+			<form>
+				<div class="form-group mb-3">
+					<label for="email" class="form-label fw-bold">Adresse Email</label>
+					<input type="email" id="email" class="form-control" placeholder="Entrez votre email">
 				</div>
-				<div>
-					{{ form_label(user_form.password, null) }}
-					{{ form_widget(user_form.password, {'attr': { 'class': 'form-label' }}) }}
-					{{ form_errors(user_form.password)}}
+				<div class="form-group mb-3">
+					<label for="password" class="form-label fw-bold">Mot de passe</label>
+					<input type="password" id="password" class="form-control" placeholder="Entrez votre mot de passe">
 				</div>
-				<div>
-					{{ form_label(user_form.pseudo, null) }}
-					{{ form_widget(user_form.pseudo) }}
-					{{ form_errors(user_form.pseudo)}}
+				<div class="form-group mb-3">
+					<label for="pseudo" class="form-label fw-bold">Pseudo</label>
+					<input type="text" id="pseudo" class="form-control" placeholder="Entrez votre pseudo">
 				</div>
-				<div>
-					{{ form_widget(user_form.submit) }}
+				<div class="d-grid">
+					<button type="submit" class="btn btn-primary">S'inscrire</button>
 				</div>
-				{{ form_end(user_form) }}
-			</div>
+			</form>
+			<p class="text-center mt-3 text-muted">Vous avez déjà un compte ?
+				<a href="/login" class="text-primary">Connectez-vous</a>
+			</p>
 		</div>
 	</div>
+
+</main>
+
 {% endblock %}
