@@ -11,7 +11,7 @@ use Symfony\Component\Routing\Attribute\Route;
 
 class ProfileController extends AbstractController
 {
-    #[Route('/profile/{id}', name: 'app_profile')]
+    #[Route('/profile', name: 'app_profile')]
     public function profile(EventUserRepository $eventUserRepository, EventRepository $eventRepository): Response
     {
         $user = $this->getUser();
