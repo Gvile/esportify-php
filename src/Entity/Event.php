@@ -40,7 +40,7 @@ class Event
     /**
      * @var Collection<int, EventImage>
      */
-    #[ORM\OneToMany(targetEntity: EventImage::class, mappedBy: 'event')]
+    #[ORM\OneToMany(mappedBy: 'event', targetEntity: EventImage::class, cascade: ['persist'], orphanRemoval: true)]
     private Collection $eventImages;
 
     /**

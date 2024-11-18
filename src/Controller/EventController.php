@@ -28,24 +28,11 @@ class EventController extends AbstractController
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
+            $em = $doctrine->getManager();
+            $em->persist($event);
+            $em->flush();
 
-            $base64Images = $request->get('base64Images');
-
-            if ($base64Images) {
-                $em = $doctrine->getManager();
-
-                foreach ($base64Images as $base64Image) {
-                    $eventImage = new EventImage();
-                    $eventImage->setImage($base64Image);
-                    $eventImage->setEvent($event);
-                    $em->persist($eventImage);
-                }
-
-                $em->persist($event);
-                $em->flush();
-
-                return $this->redirectToRoute("app_home");
-            }
+            return $this->redirectToRoute("app_home");
         }
 
         return $this->render('event/add-event.html.twig', [

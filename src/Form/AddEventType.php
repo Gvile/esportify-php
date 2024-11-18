@@ -6,7 +6,7 @@ use App\Entity\Event;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -68,14 +68,11 @@ class AddEventType extends AbstractType
                 "html5" => true,
                 "label" => "Date de fin"
             ])
-            ->add('eventImages', FileType::class, [
-                'label' => 'Images de l\'événement',
-                'mapped' => false, // Le champ n'est pas directement lié à l'entité
-                'multiple' => true, // Permet d'ajouter plusieurs fichiers
-                'required' => false,
-                'attr' => [
-                    'accept' => 'image/*', // Restriction aux fichiers image
-                ],
+            ->add('eventImages', CollectionType::class, [
+                'entry_type' => EventImageType::class,
+                'allow_add' => true,
+                'by_reference' => false,
+                'label' => "Images",
             ]);
     }
 
