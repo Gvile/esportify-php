@@ -1,21 +1,73 @@
 {% extends 'base.html.twig' %}
 
+{% block stylesheets %}
+<link rel="stylesheet" href="{{ asset('css/list.css') }}">
+{% endblock %}
+
 {% block title %}Tous les événements
 {% endblock %}
 
 {% block body %}
-	<h1>Tous les événements</h1>
+<h1>Tournois</h1>
 
-	<ul>
-		{% for event in events %}
-			<li>
-				{{ event.title }}
-				-
-				{{ event.startDate|date('Y-m-d H:i') }}
-				{# <a href="{{ path('event_detail', {'id': event.id}) }}" class="btn btn-primary">Voir Détails</a> #}
+
+
+</head>
+
+<main>
+	<div class="container mt-5">
+		<h2 class="text-center">Recherche</h2>
+
+		<div class="form-container">
+			<form action="POST" class="filter">
+				<label for="name">Nom d'event</label>
+				<input type="text" id="name" name="name" minlength="1" maxlength="25" size="10">
+
+				<label for="max-joueurs">Max joueurs</label>
+				<input type="number" id="max-joueurs" name="max joueurs" min="1" max="999" step="1">
+
+				<label for="date_debut">Date début</label>
+				<input type="date" id="date_debut" name="date_debut">
+
+				<label for="date_fin">Date fin</label>
+				<input type="date" id="date_fin" name="date_fin">
+
+				<button type="submit">filtrer</button>
+			</form>
+		</div>
+		<ul class="event-list">
+			{% for event in events %}
+			<li class="event-item d-flex align-items-center">
+				<!-- Image de l'événement -->
+				<div class="event-image-container">
+					{% if event.eventImages|length > 0 %}
+					{% set image = event.eventImages|first %}
+					<img src="{{ asset('images/events/' ~ image.name) }}" alt="{{ image.name }}" class="event-image">
+					{% else %}
+					<img src="{{ asset('images/events/default.jpg') }}" alt="Image par défaut" class="event-image">
+					{% endif %}
+				</div>
+
+				<!-- Contenu : titre et description -->
+				<div class="event-content ms-3 flex-grow-1">
+					<h3 class="event-title">{{ event.title }}</h3>
+					<p class="event-participants">Joueurs max {{ event.maxUser }}</p>
+					<p class="event-description">{{ event.description }}</p>
+					<p class="event-date">{{ event.startDate|date('Y-m-d H:i') }}</p>
+				</div>
+
+				<!-- Bouton -->
+				<div class="event-buttons">
+					<a href="{{ path('app_event_detail', {'id': event.id}) }}" class="btn btn-primary btn-sm">Voir
+						Détails</a>
+				</div>
 			</li>
-		{% else %}
-			<p>Aucun événement trouvé.</p>
-		{% endfor %}
-	</ul>
+			{% else %}
+			<p class="no-events">Aucun événement trouvé.</p>
+			{% endfor %}
+		</ul>
+
+
+
+</main>
 {% endblock %}
