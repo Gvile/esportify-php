@@ -12,6 +12,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\ORM\EntityManagerInterface;
 
@@ -57,6 +58,36 @@ class EventController extends AbstractController
             "events" => $filteredEvents,
         ]);
     }
+
+    #[Route('/filtered_events', name: 'filtered_events', methods: ['POST'])]
+    public function filteredEvents(Request $request, EventRepository $eventRepository): JsonResponse
+    {
+        $filter = $request->request->all();
+        $events = $eventRepository->findEventsByFilter($filter);
+
+        // Préparer les données JSON
+        $eventData = [];
+        foreach ($events as $event) {
+            $images = $event->getEventImages();
+            $firstImage = null;
+            if (count($images) > 0) {
+                $firstImage = $images[0]->getName();
+            }
+
+            $eventData[] = [
+                'title' => $event->getTitle(),
+                'maxUser' => $event->getMaxUser(),
+                'description' => $event->getDescription(),
+                'startDate' => $event->getStartDate()->format('Y-m-d H:i'),
+                'endDate' => $event->getEndDate()->format('Y-m-d H:i'),
+                'image' => $firstImage,
+                'detailLink' => $this->generateUrl('app_event_detail', ['id' => $event->getId()]),
+            ];
+        }
+
+        return new JsonResponse($eventData);
+    }
+
 
     #[Route('/event/{id}', name: 'app_event_detail')]
     public function getbyId(int $id, EventRepository $eventRepository, EventUserRepository $eventUserRepository): Response
