@@ -23,6 +23,10 @@ class UserController extends AbstractController
     #[Route('/signup', name: 'app_user_signup')]
     public function signup(Request $request, ManagerRegistry $doctrine): Response
     {
+        if ($this->getUser()) {
+            return $this->redirect($this->generateUrl('app_home'));
+        }
+
         $user = new User();
         $form = $this->createForm(SignupType::class, $user);
         $form->handleRequest($request);

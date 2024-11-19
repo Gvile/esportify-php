@@ -12,9 +12,11 @@
 <main>
 	<h1 class="profil-name">Profil de
 		{{ user.pseudo }}</h1>
+	{% if 'ROLE_ORGANIZER' in user.roles %}
 	<div class="create-event" <button class="btn btn-primary">
 		<a href="/event/create">Créer un événement</a>
 		</button>
+		{% endif %}
 	</div>
 	<h2>Événements auxquels vous êtes inscrit(e)</h2>
 	{% if events_registrated is not empty %}

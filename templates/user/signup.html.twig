@@ -12,7 +12,7 @@
 
 
 <main>
-	<div class="container-fluid d-flex justify-content-center align-items-center min-vh-100 bg-light">
+	{# <div class="container-fluid d-flex justify-content-center align-items-center min-vh-100 bg-light">
 		<div class="bg-white rounded shadow p-4" style="max-width: 500px; width: 100%;">
 			<h2 class="text-center mb-4 text-primary">Créer un compte</h2>
 			<form>
@@ -36,7 +36,11 @@
 				<a href="/login" class="text-primary">Connectez-vous</a>
 			</p>
 		</div>
-	</div>
+	</div> #}
+
+	{{ form_start(user_form, {'attr': {'novalidate': 'novalidate'}}) }}
+
+	{{ form_end(user_form) }}
 
 </main>
 
