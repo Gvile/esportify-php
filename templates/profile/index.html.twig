@@ -2,59 +2,74 @@
 
 {% block title %}Mes événements inscrits
 {% endblock %}
+{% block stylesheets %}
+
+<link rel="stylesheet" href="{{ asset('css/profile.css') }}">
+
+{% endblock %}
 
 {% block body %}
-	<h1>Profil de
+<main>
+	<h1 class="profil-name">Profil de
 		{{ user.pseudo }}</h1>
-
-	<button>
+	<div class="create-event" <button class="btn btn-primary">
 		<a href="/event/create">Créer un événement</a>
-	</button>
+		</button>
+	</div>
 	<h2>Événements auxquels vous êtes inscrit(e)</h2>
 	{% if events_registrated is not empty %}
-		<ul>
-			{% for eventUser in events_registrated %}
-				<li>
-					<h2>{{ eventUser.event.title }}</h2>
-					<p>
-						<strong>Date de début :</strong>
-						{{ eventUser.event.startDate|date('Y-m-d H:i') }}</p>
-					<p>
-						<strong>Date de fin :</strong>
-						{{ eventUser.event.endDate|date('Y-m-d H:i') }}</p>
-					<p>
-						<strong>Description :</strong>
-						{{ eventUser.event.description }}</p>
-					<a href="{{ path('app_event_detail', {'id': eventUser.event.id}) }}" class="btn btn-primary">Voir les détails</a>
-				</li>
-			{% endfor %}
-		</ul>
+	<ul class="participated-event-table">
+		{% for eventUser in events_registrated %}
+		<li>
+			<h2>{{ eventUser.event.title }}</h2>
+			<p>
+				<strong>Date de début :</strong>
+				{{ eventUser.event.startDate|date('Y-m-d H:i') }}
+			</p>
+			<p>
+				<strong>Date de fin :</strong>
+				{{ eventUser.event.endDate|date('Y-m-d H:i') }}
+			</p>
+			<p>
+				<strong>Description :</strong>
+				{{ eventUser.event.description }}
+			</p>
+			<a href="{{ path('app_event_detail', {'id': eventUser.event.id}) }}" class="btn btn-primary">Voir les
+				détails</a>
+		</li>
+		{% endfor %}
+	</ul>
 	{% else %}
-		<p>Vous n'êtes inscrit(e) à aucun événement pour le moment.</p>
+	<p>Vous n'êtes inscrit(e) à aucun événement pour le moment.</p>
 	{% endif %}
 
 	{% if 'ROLE_ORGANIZER' in user.roles %}
-		<h2>Événements que vous organisez :</h2>
+	<h2>Événements que vous organisez :</h2>
 
-		{% if events_organized is not empty %}
-			<ul>
-				{% for event in events_organized %}
-					<li>{{ event.title }}
-						(du
-						{{ event.startDate|date('d/m/Y') }}
-						au
-						{{ event.endDate|date('d/m/Y') }}), statut :
-						{% if event.isValidated %}
-							Validé
-						{% else %}
-							En attente de validation
-						{% endif %}
-					</li>
-				{% endfor %}
-			</ul>
-		{% else %}
-			<p>Vous n'organisez aucun événement.</p>
-		{% endif %}
+	{% if events_organized is not empty %}
+	<ul>
+		{% for event_organized in events_organized %}
+		<li>{{ event_organized.title }}
+			<a href="{{ path('app_event_detail', {'id': event_organized.id}) }}" class="btn btn-primary">Voir les
+				détails</a>
+			(du
+			{{ event_organized.startDate|date('d/m/Y') }}
+			au
+			{{ event_organized.endDate|date('d/m/Y') }}), statut :
+			{% if event_organized.isValidated %}
+			Validé
+			{% else %}
+			En attente de validation
+
+			{% endif %}
+
+		</li>
+		{% endfor %}
+
+	</ul>
+	{% else %}
+	<p>Vous n'organisez aucun événement.</p>
 	{% endif %}
-
+	{% endif %}
+</main>
 {% endblock %}
