@@ -8,23 +8,33 @@
 {% endblock %}
 
 {% block body %}
-<h1>Tournois</h1>
-
-
-
-</head>
-
 <main>
+	<h1>Tournois</h1>
 	<div class="container mt-5">
 		<h2 class="text-center">Recherche</h2>
 
 		<div class="form-container">
-			<form action="POST" class="filter">
+
+			<form class="filter">
+				<label for="title">Nom d'event</label>
+				<input type="text" id="title" name="title">
+
+				<label for="maxUser">Max joueurs</label>
+				<input type="number" id="maxUser" name="maxUser" min="1" max="999" step="1">
+
+				<label for="startDate">Date début</label>
+				<input type="date" id="startDate" name="startDate">
+
+				<label for="endDate">Date fin</label>
+				<input type="date" id="endDate" name="endDate">
+			</form>
+
+			{# <form action="POST" class="filter">
 				<label for="name">Nom d'event</label>
-				<input type="text" id="name" name="name" minlength="1" maxlength="25" size="10">
+				<input type="text" id="name" name="name">
 
 				<label for="max-joueurs">Max joueurs</label>
-				<input type="number" id="max-joueurs" name="max joueurs" min="1" max="999" step="1">
+				<input type="number" id="max-joueurs" name="max-joueurs" min="1" max="999" step="1">
 
 				<label for="date_debut">Date début</label>
 				<input type="date" id="date_debut" name="date_debut">
@@ -33,7 +43,7 @@
 				<input type="date" id="date_fin" name="date_fin">
 
 				<button type="submit">filtrer</button>
-			</form>
+			</form> #}
 		</div>
 		<ul class="event-list">
 			{% for event in events %}
@@ -66,8 +76,7 @@
 			<p class="no-events">Aucun événement trouvé.</p>
 			{% endfor %}
 		</ul>
-
-
-
+	</div>
 </main>
+<script src="{{ asset('js/filterEvents.js') }}"></script>
 {% endblock %}
