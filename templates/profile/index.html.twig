@@ -2,7 +2,7 @@
 
 {% block title %}Mes événements inscrits
 {% endblock %}
-{% block stylesheets %}
+{% block extra_stylesheets %}
 
 <link rel="stylesheet" href="{{ asset('css/profile.css') }}">
 
@@ -23,7 +23,7 @@
 	<ul class="participated-event-table">
 		{% for eventUser in events_registrated %}
 		<li>
-			<h2>{{ eventUser.event.title }}</h2>
+			<h2 class="text-center">{{ eventUser.event.title }}</h2>
 			<p>
 				<strong>Date de début :</strong>
 				{{ eventUser.event.startDate|date('Y-m-d H:i') }}
@@ -36,8 +36,11 @@
 				<strong>Description :</strong>
 				{{ eventUser.event.description }}
 			</p>
-			<a href="{{ path('app_event_detail', {'id': eventUser.event.id}) }}" class="btn btn-primary">Voir les
-				détails</a>
+			<div class="bouton">
+				<a href="{{ path('app_event_detail', {'id': eventUser.event.id}) }}" class="btn btn-primary mt-4">Voir
+					les
+					détails</a>
+			</div>
 		</li>
 		{% endfor %}
 	</ul>
@@ -49,11 +52,9 @@
 	<h2>Événements que vous organisez :</h2>
 
 	{% if events_organized is not empty %}
-	<ul>
+	<ul class="organized-event-table">
 		{% for event_organized in events_organized %}
-		<li>{{ event_organized.title }}
-			<a href="{{ path('app_event_detail', {'id': event_organized.id}) }}" class="btn btn-primary">Voir les
-				détails</a>
+		<li> <span class="d-flex justify-content-center">{{ event_organized.title }}</span> </br>
 			(du
 			{{ event_organized.startDate|date('d/m/Y') }}
 			au
@@ -64,7 +65,11 @@
 			En attente de validation
 
 			{% endif %}
-
+			<div class="bouton">
+				<a href="{{ path('app_event_detail', {'id': event_organized.id}) }}" class="btn btn-primary mt-4">Voir
+					les
+					détails</a>
+			</div>
 		</li>
 		{% endfor %}
 

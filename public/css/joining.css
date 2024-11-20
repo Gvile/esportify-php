@@ -1,0 +1,25 @@
+/* Centered container for content */
+h1 {
+    background-color: #ffffff;
+    padding: 20px 40px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    font-size: 1.5rem;
+    line-height: 1.6;
+    color: #2c3e50;
+}
+
+/* Highlighting the event title and user name */
+h1 span {
+    font-weight: bold;
+    color: #3498db;
+}
+
+/* Adding responsiveness */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 1.2rem;
+        padding: 15px 30px;
+    }
+}
