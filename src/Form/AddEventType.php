@@ -72,7 +72,7 @@ class AddEventType extends AbstractType
                 'entry_type' => EventImageType::class,
                 'allow_add' => true,
                 'by_reference' => false,
-                'label' => "Images",
+                'label' => false,
             ]);
     }
 

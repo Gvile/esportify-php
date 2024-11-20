@@ -24,7 +24,7 @@ main {
 }
 
 .create-event {
-    text-align: end;
+    text-align: center;
     margin-bottom: 30px;
 }
 
@@ -77,14 +77,11 @@ main {
     font-size: 14px;
 }
 
-.btn-primary {
-    display: inline-block;
-    text-decoration: none;
-    color: #fff;
-    background-color: #007bff;
-    padding: 8px 12px;
-    border-radius: 5px;
-    transition: background-color 0.3s;
+.bouton {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+
 }
 
 .btn-primary:hover {

@@ -1,58 +1,65 @@
 {% extends 'base.html.twig' %}
+{% block stylesheets %}
+
+<link rel="stylesheet" href="{{ asset('css/addevent.css') }}">
+
+{% endblock %}
 
 {% block title %}Créer un événement{% endblock %}
 
 {% block body %}
-<h1>Créer un événement</h1>
+<main>
+	<h1>Créer un événement</h1>
 
-{{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
-<div class="form-group">
-	{{ form_label(form.title) }}
-	{{ form_widget(form.title, {'attr': {'class': 'form-control'}}) }}
-	{{ form_errors(form.title) }}
-</div>
-
-<div class="form-group">
-	{{ form_label(form.description) }}
-	{{ form_widget(form.description, {'attr': {'class': 'form-control'}}) }}
-	{{ form_errors(form.description) }}
-</div>
-
-<div class="form-group">
-	{{ form_label(form.maxUser) }}
-	{{ form_widget(form.maxUser, {'attr': {'class': 'form-control'}}) }}
-	{{ form_errors(form.maxUser) }}
-</div>
-
-<div class="form-group">
-	{{ form_label(form.startDate) }}
-	{{ form_widget(form.startDate, {'attr': {'class': 'form-control'}}) }}
-	{{ form_errors(form.startDate) }}
-</div>
-
-<div class="form-group">
-	{{ form_label(form.endDate) }}
-	{{ form_widget(form.endDate, {'attr': {'class': 'form-control'}}) }}
-	{{ form_errors(form.endDate) }}
-</div>
-
-<div class="form-group">
-	<label>{{ form_label(form.eventImages) }}</label>
-	<div data-prototype="{{ form_widget(form.eventImages.vars.prototype)|e('html_attr') }}" class="collection-holder">
-		{% for image in form.eventImages %}
-		<div class="form-collection-item">
-			{{ form_widget(image.file, {'attr': {'class': 'form-control'}}) }}
-			<button type="button" class="btn btn-danger btn-sm remove-item">Supprimer</button>
-		</div>
-		{% endfor %}
+	{{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+	<div class="form-group">
+		{{ form_label(form.title) }}
+		{{ form_widget(form.title, {'attr': {'class': 'form-control'}}) }}
+		{{ form_errors(form.title) }}
 	</div>
-	<button type="button" class="btn btn-primary btn-sm add-item">Ajouter une image</button>
-	{{ form_errors(form.eventImages) }}
-</div>
 
-<button type="submit" class="btn btn-success">Créer l'événement</button>
-{{ form_end(form) }}
+	<div class="form-group">
+		{{ form_label(form.description) }}
+		{{ form_widget(form.description, {'attr': {'class': 'form-control'}}) }}
+		{{ form_errors(form.description) }}
+	</div>
 
+	<div class="form-group">
+		{{ form_label(form.maxUser) }}
+		{{ form_widget(form.maxUser, {'attr': {'class': 'form-control'}}) }}
+		{{ form_errors(form.maxUser) }}
+	</div>
+
+	<div class="form-group">
+		{{ form_label(form.startDate) }}
+		{{ form_widget(form.startDate, {'attr': {'class': 'form-control'}}) }}
+		{{ form_errors(form.startDate) }}
+	</div>
+
+	<div class="form-group">
+		{{ form_label(form.endDate) }}
+		{{ form_widget(form.endDate, {'attr': {'class': 'form-control'}}) }}
+		{{ form_errors(form.endDate) }}
+	</div>
+
+	<div class="form-group">
+		<label>{{ form_label(form.eventImages) }}</label>
+		<div data-prototype="{{ form_widget(form.eventImages.vars.prototype)|e('html_attr') }}"
+			class="collection-holder">
+			{% for image in form.eventImages %}
+			<div class="form-collection-item">
+				{{ form_widget(image.file, {'attr': {'class': 'form-control'}}) }}
+				<button type="button" class="btn btn-danger btn-sm remove-item">Supprimer</button>
+			</div>
+			{% endfor %}
+		</div>
+		<button type="button" class="btn btn-primary btn-sm add-item">Ajouter une image</button>
+		{{ form_errors(form.eventImages) }}
+	</div>
+
+	<button type="submit" class="btn btn-success">Créer l'événement</button>
+	{{ form_end(form) }}
+</main>
 <script>
 	document.addEventListener('DOMContentLoaded', function () {
 		let collectionHolder = document.querySelector('.collection-holder');
@@ -64,7 +71,10 @@
 			let newItem = document.createElement('div');
 			newItem.classList.add('form-collection-item');
 			newItem.innerHTML = prototype;
+
+			newItem.innerHTML += '</br><div class="d-flex justify-content-end">';
 			newItem.innerHTML += '<button type="button" class="btn btn-danger btn-sm remove-item">Supprimer</button>';
+			newItem.innerHTML += '</div>';
 			collectionHolder.appendChild(newItem);
 			index++;
 		});

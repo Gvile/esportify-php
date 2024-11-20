@@ -1,7 +1,5 @@
-/* Style de base */
 main {
     font-family: Arial, sans-serif;
-    background-color: #f8f9fa;
     /* Couleur de fond douce */
     margin: 0;
     padding: 20px;
@@ -31,18 +29,9 @@ main {
     /* Espacement entre les lignes augmenté */
 }
 
-/* Marges entre sections */
-.description,
-.event-list,
-.carousel {
-    margin-top: 30px;
-    /* Espacement augmenté */
-    margin-bottom: 30px;
-
-}
-
 .event-section {
     margin: 30px 0;
+
     padding: 20px;
     border: 1px solid #ddd;
     /* Ligne de séparation */
@@ -50,52 +39,50 @@ main {
     /* Coins arrondis */
     background-color: #f9f9f9;
     /* Légère couleur de fond */
+}
 
-    /* Espacement entre les événements */
-    .event-list ul {
-        list-style: none;
-        font-size: 1.6rem;
-        padding: 0;
-        margin: 0;
-    }
+/* Espacement entre les événements */
+.event-list ul {
+    list-style: none;
+    font-size: 1.2rem;
+    padding: 0;
+    margin: 0;
+}
 
-    .event-list li {
-        padding: 10px;
-        border-bottom: 1px solid #ddd;
-    }
+.event-list li {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
 
-    /* Espacement entre les éléments de la liste */
-    ul li+li {
-        margin-top: 5px;
-    }
 
-    .event-list li:last-child {
-        border-bottom: none;/
-    }
+ul li+li {
+    margin-top: 5px;
+}
 
-    .event-content {
+.event-list li:last-child {
+    border-bottom: none;/
+}
+
+
+.event-content button {
+    margin-left: 10px;
+}
+
+@media (min-width: 768px) {
+    .event {
         display: flex;
-        justify-content: space-between;
+        flex-direction: column;
         align-items: center;
+        justify-content: center;
+        max-width: 100%;
+
     }
 
-    .event-content button {
-        margin-left: 10px;
+    .event-section {
+        width: 65%;
     }
 
-    /* Carrousel */
-    #carouselExampleSlidesOnly {
-        height: 550px;
-        width: 70%;
-        /* Largeur du carrousel */
-        overflow: hidden;
-        margin: 0 auto;
-        /* Centrer le carrousel */
-    }
-
-    .carousel-inner img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
+    .custom-carousel {
+        width: 30vw;
     }
 }

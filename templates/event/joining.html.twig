@@ -1,11 +1,15 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-	{{ event.title }}
+{{ event.title }}
+{% endblock %}
+{% block extra_stylesheets %}
+<link rel="stylesheet" href="{{ asset('css/joining.css') }}">
+
 {% endblock %}
 
 {% block body %}
-	<h1>Bonjour
-		{{ user.pseudo }}, vous avez bien rejoint l'événement :
-		{{ event.title }}</h1>
+<h1>Bonjour
+	{{ user.pseudo }}, vous avez bien rejoint l'événement :
+	{{ event.title }}</h1>
 {% endblock %}
