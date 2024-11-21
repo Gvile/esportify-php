@@ -1,0 +1,106 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+    margin: 0;
+    padding: 0;
+    color: #333;
+}
+
+main {
+    width: 90%;
+    max-width: 1200px;
+    margin: 20px auto;
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.profil-name {
+    font-size: 24px;
+    color: #007bff;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.create-event {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.create-event a {
+    text-decoration: none;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+.create-event a:hover {
+    background-color: #0056b3;
+}
+
+.participated-event-table,
+.organized-event-table {
+    list-style: none;
+    padding: 0;
+    margin: 20px 0;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    background: #f8f9fa;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+}
+
+.participated-event-table li,
+.organized-event-table li {
+    padding: 15px;
+    border-bottom: 1px solid #ddd;
+}
+
+.participated-event-table li:last-child,
+.organized-event-table li:last-child {
+    border-bottom: none;
+}
+
+.participated-event-table h2,
+.organized-event-table h2 {
+    font-size: 18px;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.participated-event-table p,
+.organized-event-table p {
+    margin: 5px 0;
+    font-size: 14px;
+}
+
+.bouton {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+}
+
+p {
+    font-size: 14px;
+    color: #777;
+    text-align: center;
+}
+
+@media (max-width: 768px) {
+    main {
+        padding: 15px;
+    }
+
+    .btn-primary {
+        font-size: 13px;
+        padding: 6px 10px;
+    }
+}

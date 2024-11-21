@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Log in!
+{% endblock %}
+
+{% block body %}
+<main>
+	<form method="post">
+		<div class="container d-flex justify-content-center align-items-center min-vh-100">
+			<div class="bg-light p-5 rounded shadow-sm w-100" style="max-width: 400px;">
+				<h1 class="text-center mb-4 text-primary">Se Connecter</h1>
+
+				<!-- Champ Email -->
+				<div class="mb-4">
+					<label for="username" class="form-label">Email</label>
+					<input type="email" value="{{ last_username }}" name="_username" id="username"
+						class="form-control form-control-lg" autocomplete="email" required autofocus>
+				</div>
+
+				<!-- Champ Mot de passe -->
+				<div class="mb-4">
+					<label for="password" class="form-label">Mot de passe</label>
+					<input type="password" name="_password" id="password" class="form-control form-control-lg"
+						autocomplete="current-password" required>
+				</div>
+
+				<!-- Token CSRF -->
+				<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+				<!-- Bouton de soumission -->
+				<div class="d-grid mb-4">
+					<button class="btn btn-primary btn-lg" type="submit">Connexion</button>
+				</div>
+
+				<!-- Lien mot de passe oublié -->
+				<div class="text-center">
+					<a href="#" class="text-muted">Mot de passe oublié ?</a>
+				</div>
+			</div>
+		</div>
+	</form>
+</main>
+
+{% endblock %}

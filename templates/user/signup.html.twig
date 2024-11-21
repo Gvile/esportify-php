@@ -1,0 +1,78 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Inscription
+{% endblock %}
+{% block extra_stylesheets %}
+
+<link rel="stylesheet" href="{{ asset('css/signup.css') }}">
+
+{% endblock %}
+{% block body %}
+
+
+<main>
+	{# <div class="container-fluid d-flex justify-content-center align-items-center min-vh-100 bg-light">
+		<div class="bg-white rounded shadow p-4" style="max-width: 500px; width: 100%;">
+			<h2 class="text-center mb-4 text-primary">Créer un compte</h2>
+			<form>
+				<div class="form-group mb-3">
+					<label for="email" class="form-label fw-bold">Adresse Email</label>
+					<input type="email" id="email" class="form-control" placeholder="Entrez votre email">
+				</div>
+				<div class="form-group mb-3">
+					<label for="password" class="form-label fw-bold">Mot de passe</label>
+					<input type="password" id="password" class="form-control" placeholder="Entrez votre mot de passe">
+				</div>
+				<div class="form-group mb-3">
+					<label for="pseudo" class="form-label fw-bold">Pseudo</label>
+					<input type="text" id="pseudo" class="form-control" placeholder="Entrez votre pseudo">
+				</div>
+				<div class="d-grid">
+					<button type="submit" class="btn btn-primary">S'inscrire</button>
+				</div>
+			</form>
+			<p class="text-center mt-3 text-muted">Vous avez déjà un compte ?
+				<a href="/login" class="text-primary">Connectez-vous</a>
+			</p>
+		</div>
+	</div> #}
+	<h2 class="text-center mt-4 mb-4">Inscription</h2>
+	<div class="container-fluid d-flex justify-content-center align-items-center" style="min-width: 60vw;">
+		<div>
+			{{ form_start(user_form, {
+			'attr': {
+			'novalidate': 'novalidate',
+			}
+			}) }}
+
+			<div style="min-width: 30vw;">
+				<div class="form-group mt-3">
+					{{ form_label(user_form.email) }}
+					{{ form_widget(user_form.email, {'attr': {'class': 'form-control form-control-lg'}}) }}
+					{{ form_errors(user_form.email) }}
+				</div>
+
+				<div class="form-group mt-3">
+					{{ form_label(user_form.password) }}
+					{{ form_widget(user_form.password, {'attr': {'class': 'form-control form-control-lg'}}) }}
+					{{ form_errors(user_form.password) }}
+				</div>
+
+				<div class="form-group mt-3">
+					{{ form_label(user_form.pseudo) }}
+					{{ form_widget(user_form.pseudo, {'attr': {'class': 'form-control form-control-lg'}}) }}
+					{{ form_errors(user_form.pseudo) }}
+				</div>
+
+				<div class="form-group submit-group d-flex
+					justify-content-center">
+					{{ form_widget(user_form.submit, {'attr': {'class': 'btn btn-lg btn-primary mt-4'}}) }}
+				</div>
+			</div>
+
+			{{ form_end(user_form) }}
+		</div>
+	</div>
+</main>
+
+{% endblock %}
