@@ -1,17 +1,13 @@
 main {
     font-family: Arial, sans-serif;
-    /* Couleur de fond douce */
     margin: 0;
     padding: 20px;
 }
 
-/* Titres */
 .page-title {
     text-align: center;
     font-size: 2.4em;
-    /* Taille augmentée */
     margin-bottom: 20px;
-    /* Espacement supplémentaire */
 
 }
 
@@ -22,11 +18,10 @@ main {
 
 .Event-title {
     font-size: 1.3rem;
-    /* Plus grand pour meilleure lisibilité */
     text-align: justify;
     margin-bottom: 10px;
     line-height: 1.8;
-    /* Espacement entre les lignes augmenté */
+
 }
 
 .event-section {
@@ -34,14 +29,10 @@ main {
 
     padding: 20px;
     border: 1px solid #ddd;
-    /* Ligne de séparation */
     border-radius: 10px;
-    /* Coins arrondis */
     background-color: #f9f9f9;
-    /* Légère couleur de fond */
 }
 
-/* Espacement entre les événements */
 .event-list ul {
     list-style: none;
     font-size: 1.2rem;

@@ -1,16 +1,13 @@
-/* Conteneur principal */
 .event-detail-container {
     width: 80%;
     margin: 40px auto;
-    /* Centrer la page */
     padding: 20px;
     background-color: #f9f9f9;
-    /* Fond léger */
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-/* Titre de l'événement */
+
 .event-title {
     font-size: 2rem;
     text-align: center;
@@ -18,7 +15,7 @@
     color: #333;
 }
 
-/* Section des dates */
+
 .event-dates p {
     font-size: 1rem;
     color: #555;
@@ -26,15 +23,16 @@
     text-align: center;
 }
 
-/* Section du carrousel */
+
 .carousel-section {
     margin: 20px 0 30px;
+
 }
 
 .carousel-inner {
-    width: 50%;
-    height: 650px;
+    width: 100%;
     object-fit: cover;
+    align-items: center;
 }
 
 .carousel {
@@ -43,7 +41,7 @@
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
-/* Description de l'événement */
+
 .event-description {
     margin: 20px 0;
     font-size: 1.1rem;
@@ -51,7 +49,7 @@
     color: #444;
 }
 
-/* Images associées à l'événement */
+
 .event-images {
     display: flex;
     flex-wrap: wrap;
@@ -72,7 +70,7 @@
     transform: scale(1.05);
 }
 
-/* Actions de l'utilisateur */
+
 .event-actions {
     margin-top: 20px;
     text-align: center;
@@ -84,7 +82,7 @@
     padding: 10px 20px;
 }
 
-/* Messages d'alerte */
+
 .alert {
     margin: 20px 0;
     padding: 10px 15px;
@@ -104,7 +102,7 @@
     border: 1px solid #bee5eb;
 }
 
-/* Responsive design */
+
 @media (max-width: 768px) {
     .event-detail-container {
         padding: 10px;

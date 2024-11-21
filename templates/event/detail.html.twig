@@ -1,10 +1,11 @@
 {% extends 'base.html.twig' %}
 
+{% block title %}Détail de l'événement - {{ event.title }}{% endblock %}
+
 {% block extra_stylesheets %}
 <link rel="stylesheet" href="{{ asset('css/detail.css') }}">
 {% endblock %}
 
-{% block title %}Détail de l'événement - {{ event.title }}{% endblock %}
 
 {% block body %}
 <div class="event-detail-container">
@@ -15,68 +16,63 @@
 		<p><strong>Date de fin :</strong> {{ event.endDate|date('Y-m-d H:i') }}</p>
 	</div>
 
-	<div class="carousel-section">
-		<div id="carouselExampleIndicators" class="carousel slide">
-			<div class="carousel-indicators">
-				<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"
-					aria-current="true" aria-label="Slide 1"></button>
-				<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
-					aria-label="Slide 2"></button>
-				<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
-					aria-label="Slide 3"></button>
-			</div>
-			<div class="carousel-inner">
-				<div class="carousel-inner">
-					{% for image in event.eventImages %}
-					{% if image.name %}
-					<div class="carousel-item active">
-						<img src="{{ asset('images/events/' ~ image.name) }}" class="d-block w-100"
-							alt="{{ image.name }}">
+	<div class="container mt-5">
+		<div class="row d-flex justify-content-center">
+			<div class="col-md-8">
+				<div class="carousel-section">
+					<div id="carouselExampleIndicators" class="carousel slide">
+						<div class="carousel-indicators">
+							{% for image in event.eventImages %}
+							<button type="button" data-bs-target="#carouselExampleIndicators"
+								data-bs-slide-to="{{ loop.index0 }}" class="{% if loop.first %}active{% endif %}"
+								aria-current="{% if loop.first %}true{% endif %}" aria-label="Slide {{ loop.index }}">
+							</button>
+							{% endfor %}
+						</div>
+						<div class="carousel-inner">
+							{% for image in event.eventImages %}
+							{% if image.name %}
+							<div class="carousel-item {% if loop.first %}active{% endif %}">
+								<img src="{{ asset('images/events/' ~ image.name) }}" class="d-block w-100"
+									alt="{{ image.name }}">
+							</div>
+							{% endif %}
+							{% endfor %}
+						</div>
+
 					</div>
-					{% endif %}
-					{% endfor %}
 				</div>
 			</div>
-			<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
-				data-bs-slide="prev">
-				<span class="carousel-control-prev-icon" aria-hidden="true"></span>
-				<span class="visually-hidden">Previous</span>
-			</button>
-			<button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
-				data-bs-slide="next">
-				<span class="carousel-control-next-icon" aria-hidden="true"></span>
-				<span class="visually-hidden">Next</span>
-			</button>
+
+			<div class="event-description">
+				<p><strong>Description :</strong> {{ event.description }}</p>
+			</div>
+
+			<div class="event-actions">
+				{% if app.user %}
+				{% if not isEventStarted %}
+				{% if isUserRegistered %}
+				<form action="{{ path('app_event_leave', {'id': event.id}) }}" method="post">
+					<button type="submit" class="btn btn-danger">Se désinscrire</button>
+				</form>
+				{% else %}
+				<form action="{{ path('app_event_join', {'id': event.id}) }}" method="post">
+					<button type="submit" class="btn btn-primary">S'inscrire</button>
+				</form>
+				{% endif %}
+				{% else %}
+				<p class="alert alert-warning">Les inscriptions ou désinscriptions ne sont pas possibles car l'événement
+					a déjà
+					commencé.</p>
+				{% endif %}
+				{% else %}
+				<p class="alert alert-info">Veuillez vous connecter pour rejoindre ou vous désinscrire de cet événement.
+				</p>
+				{% endif %}
+
+				{% if app.user and isEventStarted and isUserRegistered %}
+				<a href="{{ path('app_event_joining', {'id': event.id}) }}" class="btn btn-primary">Rejoindre</a>
+				{% endif %}
+			</div>
 		</div>
-	</div>
-
-	<div class="event-description">
-		<p><strong>Description :</strong> {{ event.description }}</p>
-	</div>
-
-	<div class="event-actions">
-		{% if app.user %}
-		{% if not isEventStarted %}
-		{% if isUserRegistered %}
-		<form action="{{ path('app_event_leave', {'id': event.id}) }}" method="post">
-			<button type="submit" class="btn btn-danger">Se désinscrire</button>
-		</form>
-		{% else %}
-		<form action="{{ path('app_event_join', {'id': event.id}) }}" method="post">
-			<button type="submit" class="btn btn-primary">S'inscrire</button>
-		</form>
-		{% endif %}
-		{% else %}
-		<p class="alert alert-warning">Les inscriptions ou désinscriptions ne sont pas possibles car l'événement a déjà
-			commencé.</p>
-		{% endif %}
-		{% else %}
-		<p class="alert alert-info">Veuillez vous connecter pour rejoindre ou vous désinscrire de cet événement.</p>
-		{% endif %}
-
-		{% if app.user and isEventStarted and isUserRegistered %}
-		<a href="{{ path('app_event_joining', {'id': event.id}) }}" class="btn btn-primary">Rejoindre</a>
-		{% endif %}
-	</div>
-</div>
-{% endblock %}
+		{% endblock %}
