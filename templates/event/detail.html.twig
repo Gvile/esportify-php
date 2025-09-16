@@ -61,15 +61,13 @@
 				</form>
 				{% endif %}
 				{% else %}
-				<p class="alert alert-warning">Les inscriptions ou désinscriptions ne sont pas possibles car l'événement
-					a déjà
-					commencé.</p>
+				<p class="alert alert-warning">Les inscriptions ou désinscriptions ne sont pas possibles car
+					l'événement a déjà commencé.</p>
 				{% endif %}
 				{% else %}
 				<p class="alert alert-info">Veuillez vous connecter pour rejoindre ou vous désinscrire de cet événement.
 				</p>
 				{% endif %}
-
 				{% if app.user and isEventStarted and isUserRegistered %}
 				<a href="{{ path('app_event_joining', {'id': event.id}) }}" class="btn btn-primary">Rejoindre</a>
 				{% endif %}

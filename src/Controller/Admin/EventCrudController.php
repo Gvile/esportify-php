@@ -27,7 +27,6 @@ class EventCrudController extends AbstractCrudController
         yield DateTimeField::new('startDate')->setLabel('Date de début');
         yield DateTimeField::new('endDate')->setLabel('Date de fin');
         yield BooleanField::new('isValidated')->setLabel('Validation');
-        //TODO: Add event images crud
     }
 
     public function configureActions(Actions $actions): Actions

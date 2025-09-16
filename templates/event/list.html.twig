@@ -30,21 +30,6 @@
 				<input type="date" id="endDate" name="endDate" class="form-control" style="min-width: 12rem;">
 			</form>
 
-			{# <form action="POST" class="filter">
-				<label for="name">Nom d'event</label>
-				<input type="text" id="name" name="name">
-
-				<label for="max-joueurs">Max joueurs</label>
-				<input type="number" id="max-joueurs" name="max-joueurs" min="1" max="999" step="1">
-
-				<label for="date_debut">Date début</label>
-				<input type="date" id="date_debut" name="date_debut">
-
-				<label for="date_fin">Date fin</label>
-				<input type="date" id="date_fin" name="date_fin">
-
-				<button type="submit">filtrer</button>
-			</form> #}
 		</div>
 		<ul class="event-list">
 			{% for event in events %}
