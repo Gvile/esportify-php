@@ -8,7 +8,6 @@
 /var/
 /vendor/
 /migrations/*
-/public/images/events/*
 ###< symfony/framework-bundle ###
 
 ###> phpunit/phpunit ###
