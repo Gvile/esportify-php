@@ -7,7 +7,6 @@
 /public/bundles/
 /var/
 /vendor/
-/.env
 /migrations/*
 /public/images/events/*
 ###< symfony/framework-bundle ###
