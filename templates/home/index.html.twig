@@ -55,9 +55,8 @@
 					{% for event in upcomingEvents %}
 					<li class="event-item">
 						<div class="event-content">
-							<span>{{ event.title }} - {{ event.startDate|date('Y-m-d H:i') }} - {{
-								event.endDate|date('Y-m-d
-								H:i') }}</span>
+							<span>{{ event.title }} - {{ event.startDate|date('d F Y à H:i') }} - {{
+								event.endDate|date('d F Y à H:i') }}</span>
 							<a class="btn btn-primary btn-sm"
 								href="{{ path('app_event_detail', {'id': event.id}) }}">Voir plus</a>
 						</div>
@@ -74,9 +73,8 @@
 					{% for event in ongoingEvents %}
 					<li class="event-item">
 						<div class="event-content">
-							<span>{{ event.title }} - {{ event.startDate|date('Y-m-d H:i') }} à {{
-								event.endDate|date('Y-m-d
-								H:i') }}</span>
+							<span>{{ event.title }} - Du {{ event.startDate|date('d F Y à H:i') }} au {{
+								event.endDate|date('d F Y à H:i') }}</span>
 							<a class="btn btn-primary btn-sm"
 								href="{{ path('app_event_detail', {'id': event.id}) }}">Voir plus</a>
 						</div>

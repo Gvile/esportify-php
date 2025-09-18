@@ -12,8 +12,8 @@
 	<h1 class="event-title">{{ event.title }}</h1>
 
 	<div class="event-dates">
-		<p><strong>Date de début :</strong> {{ event.startDate|date('Y-m-d H:i') }}</p>
-		<p><strong>Date de fin :</strong> {{ event.endDate|date('Y-m-d H:i') }}</p>
+		<p><strong>Date de début :</strong> {{ event.startDate|date('d F Y à H:i') }}</p>
+		<p><strong>Date de fin :</strong> {{ event.endDate|date('d F Y à H:i') }}</p>
 	</div>
 
 	<div class="container mt-5">
